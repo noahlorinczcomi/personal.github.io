@@ -1,0 +1,8 @@
+module load gcc
+module load python/3.7.0
+cd /mnt/rstor/SOM_EPBI_XXZ10/njl96/hornet
+python tissue_chooser.py --candidateGenes /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/AD_genes_in_38_loci_wightman_etal.csv \
+ --nTopTissues 20 \
+ --saveAsFile yes \
+ --outFilename /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/top20_ad_eqtl_tissues \
+ --printResults yes

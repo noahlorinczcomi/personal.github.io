@@ -1,0 +1,388 @@
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH -c 10
+#SBATCH --time=1-00:00:00 
+#SBATCH --mem=50g
+#SBATCH --mail-user=<njl96@case.edu>
+#SBATCH --mail-type=ALL
+
+module load PLINK/2.00a3.1-GCC-11.2.0
+module load Python/3.10.8-GCCcore-12.2.0
+cd /mnt/rstor/SOM_EPBI_XXZ10/njl96/hornet
+export PYTHONUSERBASE=$HOME/.usr/local/python/3.10.8-GCCcore-12.2.0
+mkdir -p $PYTHONUSERBASE
+pip install --user -r requirements.txt
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/eQTLGen/data \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx False \
+ --snpLabels SNP,SNP \
+ --eQTLSNPBPLabel SNPPos \
+ --zLabels Zscore,Z \
+ --effectAlleles AssessedAllele,A1 \
+ --eQTLGeneLabel Gene \
+ --eQTLGeneBP GenePos \
+ --eQTLGWASn 30000 \
+ --ldMax 0.5 \
+ --phenotypeGWASn 450000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 1 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix blood \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_blood
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/yxy1234/xQTL/eQTL/MetaBrain/basalganglia \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx no \
+ --snpLabels SNP,SNP \
+ --eQTLSNPBPLabel SNPPos \
+ --zLabels MetaBeta@MetaSE,Z \
+ --effectAlleles SNPEffectAllele,A1 \
+ --eQTLGeneLabel Gene \
+ --eQTLGeneBP GenePos \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix basalganglia \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_basalganglia
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/yxy1234/xQTL/eQTL/MetaBrain/cerebellum \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx no \
+ --snpLabels SNP,SNP \
+ --eQTLSNPBPLabel SNPPos \
+ --zLabels MetaBeta@MetaSE,Z \
+ --effectAlleles SNPEffectAllele,A1 \
+ --eQTLGeneLabel Gene \
+ --eQTLGeneBP GenePos \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix cerebellum \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_cerebellum
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/yxy1234/xQTL/eQTL/MetaBrain/cortex \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx no \
+ --snpLabels SNP,SNP \
+ --eQTLSNPBPLabel SNPPos \
+ --zLabels MetaBeta@MetaSE,Z \
+ --effectAlleles SNPEffectAllele,A1 \
+ --eQTLGeneLabel Gene \
+ --eQTLGeneBP GenePos \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix cortex \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_cortex
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/yxy1234/xQTL/eQTL/MetaBrain/hippocampus \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx no \
+ --snpLabels SNP,SNP \
+ --eQTLSNPBPLabel SNPPos \
+ --zLabels MetaBeta@MetaSE,Z \
+ --effectAlleles SNPEffectAllele,A1 \
+ --eQTLGeneLabel Gene \
+ --eQTLGeneBP GenePos \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix hippocampus \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_hippocampus
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/yxy1234/xQTL/eQTL/MetaBrain/spinalcord \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx no \
+ --snpLabels SNP,SNP \
+ --eQTLSNPBPLabel SNPPos \
+ --zLabels MetaBeta@MetaSE,Z \
+ --effectAlleles SNPEffectAllele,A1 \
+ --eQTLGeneLabel Gene \
+ --eQTLGeneBP GenePos \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix spinalcord \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_spinalcord
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/amygdala \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix amygdala \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_amygdala
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/coronary_artery \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix coronary_artery \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_coronary_artery
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/lung \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix lung \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_lung
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/spleen \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 208 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix spleen \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_spleen
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/thyroid \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 574 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix thyroid \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_thyroid
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/adipose_subcutaneous \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 581 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix adipose_subcutaneous \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_adipose_subcutaneous
+
+python hornet.py \
+ --eQTLGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/data/GTEx/EUReQTLs/EURAllAssocs/esophagus_mucosa \
+ --phenoGWAS /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ --writableDir /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/tempfiles \
+ --LDRef data/ldref/1kg3EUR \
+ --isRawGTEx yes \
+ --snpLabels gtex,SNP \
+ --eQTLSNPBPLabel gtex \
+ --zLabels gtex,Z \
+ --effectAlleles gtex,A1 \
+ --eQTLGeneLabel gtex \
+ --eQTLGeneBP gtex \
+ --eQTLGWASn 497 \
+ --phenoLociPvalue 5e-3 \
+ --ldMax 0.7 \
+ --POtherLoci 5e-5 \
+ --otherLociMbWindow 1 \
+ --LDOtherLoci 0.5 \
+ --MVMRIVPThreshold 5e-3 \
+ --UVMRIVPThreshold 5e-3 \
+ --phenotypeGWASn 130000 \
+ --geneGroupPvalueThreshold 0.001 \
+ --hessMinScale 0.5 \
+ --graphNetworks yes \
+ --graphNetworksFilePrefix esophagus_mucosa \
+ --networkDiseaseLabel AD \
+ --networkGraphsOut /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/plots \
+ --out /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_esophagus_mucosa
+
+echo "finish job"
