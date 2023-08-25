@@ -1,0 +1,33 @@
+cd /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results
+ll
+-rwxrwxrwx 1 njl96 zhu  725572 Aug 21 14:07 AD_adipose_subcutaneous_results.txt		(done)
+-rwxrwxrwx 1 njl96 zhu   44506 Aug 18 22:52 AD_amygdala_results.txt			(done) 
+-rwxrwxrwx 1 njl96 zhu   28125 Aug 18 15:06 AD_basalganglia_results.txt			(done) (none found)
+-rwxrwxrwx 1 njl96 zhu  363052 Aug 18 14:16 AD_blood_results.txt			(done) (none found)
+-rwxrwxrwx 1 njl96 zhu  493667 Aug 18 16:58 AD_cerebellum_results.txt			(done)
+-rwxrwxrwx 1 njl96 zhu  124259 Aug 18 23:40 AD_coronary_artery_results.txt		(done) (none found) 
+-rwxrwxrwx 1 njl96 zhu 1932182 Aug 18 20:55 AD_cortex_results.txt			(done)
+-rwxrwxrwx 1 njl96 zhu  653076 Aug 21 16:00 AD_esophagus_mucosa_results.txt		(done) 
+-rwxrwxrwx 1 njl96 zhu   21893 Aug 18 21:41 AD_hippocampus_results.txt			(done) (none found)
+-rwxrwxrwx 1 njl96 zhu  568101 Aug 19 01:17 AD_lung_results.txt				(done) (none found)
+-rwxrwxrwx 1 njl96 zhu  196964 Aug 19 02:15 AD_spleen_results.txt			(done)
+-rwxrwxrwx 1 njl96 zhu  976594 Aug 21 14:22 AD_thyroid_results.txt			(done) (none found)
+
+cd /mnt/rstor/SOM_EPBI_XXZ10/njl96/HORNET
+python newloci.py -r <results file> -pg <AD GWAS summary stats file> -ld data/ldref/1kg3EUR -rsid SNP -pp P -psig 5e-8 -hpv 5e-8 -hrp 0.1 -n 1000 -o <output file>
+
+# example:
+python newloci.py \
+ -r /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/results/AD_thyroid_results.txt \
+ -pg /mnt/rstor/SOM_EPBI_XXZ10/njl96/MR/data/gene_outcome/AD/AD_Jansen_less_cols.txt.gz \
+ -ld data/ldref/1kg3EUR \
+ -rsid SNP \
+ -pp P \
+ -psig 5e-8 \
+ -hpr 0.1 \
+ -hpv 5e-8 \
+ -n 1000 \
+ -o /mnt/rstor/SOM_EPBI_XXZ10/njl96/aim3/newloci/thyroid
+
+
+
